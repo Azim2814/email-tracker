@@ -2,8 +2,20 @@ from flask import Flask, request, send_file
 from datetime import datetime
 import csv
 import os
+from flask import send_from_directory
+
 
 app = Flask(__name__)
+
+# === DOWNLOAD LOG FILES ===
+@app.route("/download/open_log")
+def download_open_log():
+    return send_from_directory(".", "open_log_test.csv", as_attachment=True)
+
+@app.route("/download/click_log")
+def download_click_log():
+    return send_from_directory(".", "click_log.csv", as_attachment=True)
+
 
 @app.route("/track/open", methods=["GET"])
 def track_open():
